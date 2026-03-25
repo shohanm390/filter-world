@@ -47,7 +47,7 @@ export default function useFilter(filters, page = 1) {
         if (sortBy === "price-high") queryParams.append("sort", "-price");
         if (sortBy === "newest") queryParams.append("sort", "-createdAt");
 
-        const res = await fetch(`http://localhost:5000/api/products?${queryParams.toString()}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/products?${queryParams.toString()}`);
         const result = await res.json();
 
         if (res.ok) {

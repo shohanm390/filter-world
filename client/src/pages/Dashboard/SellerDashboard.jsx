@@ -13,7 +13,7 @@ export default function SellerDashboard() {
   useEffect(() => {
     const fetchMyProducts = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/products?seller=${user._id}&limit=1000`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/products?seller=${user._id}&limit=1000`, {
           headers: { 'Authorization': `Bearer ${user.token}` }
         });
         const data = await res.json();
@@ -31,7 +31,7 @@ export default function SellerDashboard() {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/products/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${user.token}` }
       });

@@ -25,21 +25,21 @@ export default function AdminDashboard() {
     setError(null);
     try {
       if (activeTab === 'overview') {
-        const res = await fetch(`http://localhost:5000/api/admin/stats`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/stats`, {
           headers: { 'Authorization': `Bearer ${user.token}` }
         });
         const data = await res.json();
         if (res.ok) setStats(data.data);
         else throw new Error(data.message);
       } else if (activeTab === 'ads') {
-        const res = await fetch(`http://localhost:5000/api/products?limit=1000`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/products?limit=1000`, {
           headers: { 'Authorization': `Bearer ${user.token}` }
         });
         const data = await res.json();
         if (res.ok) setProducts(data.data);
         else throw new Error(data.message);
       } else if (activeTab === 'users') {
-        const res = await fetch(`http://localhost:5000/api/admin/users`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/users`, {
            headers: { 'Authorization': `Bearer ${user.token}` }
         });
         const data = await res.json();
@@ -56,7 +56,7 @@ export default function AdminDashboard() {
   const handleDeleteProduct = async (id) => {
     if (!window.confirm('ADMIN ACTION: Are you sure you want to delete this product?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/products/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${user.token}` }
       });
@@ -74,7 +74,7 @@ export default function AdminDashboard() {
   const handleDeleteUser = async (id) => {
     if (!window.confirm('ADMIN ACTION: Are you sure you want to delete this user? All their products will be permanently removed!')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/users/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${user.token}` }
       });

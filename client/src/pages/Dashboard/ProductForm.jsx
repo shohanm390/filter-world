@@ -33,7 +33,7 @@ export default function ProductForm() {
     useEffect(() => {
         if (isEdit) {
             const fetchProduct = async () => {
-                const res = await fetch(`http://localhost:5000/api/products/${id}`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/products/${id}`);
                 const data = await res.json();
                 if (res.ok) {
                     setFormData({
@@ -65,8 +65,8 @@ export default function ProductForm() {
         };
 
         const url = isEdit 
-            ? `http://localhost:5000/api/products/${id}`
-            : "http://localhost:5000/api/products";
+            ? `${import.meta.env.VITE_API_URL}/products/${id}`
+            : `${import.meta.env.VITE_API_URL}/products`;
         
         const method = isEdit ? "PUT" : "POST";
 
